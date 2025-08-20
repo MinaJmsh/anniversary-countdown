@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  Animated,
+  Dimensions,
+  Easing,
+  Image,
+  ScrollView,
+  StyleSheet,
   Text,
   View,
-  StyleSheet,
-  Animated,
-  Easing,
-  ScrollView,
-  Dimensions,
-  Image,
 } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 
@@ -87,14 +87,27 @@ export default function AnniversaryCountdown() {
   const floatingHeart = useRef(new Animated.Value(0)).current;
   const celebrationScale = useRef(new Animated.Value(0)).current;
 
-  // Background hearts animation - increased to 20 hearts with random icons
+  // Preload your icons in an array
+  const backgroundIcons = [
+    require("../assets/images/bgicon1.png"),
+    require("../assets/images/bgicon2.png"),
+    require("../assets/images/bgicon3.png"),
+    require("../assets/images/bgicon4.png"),
+    require("../assets/images/bgicon5.png"),
+    require("../assets/images/bgicon6.png"),
+    require("../assets/images/bgicon7.png"),
+    require("../assets/images/bgicon8.png"),
+    require("../assets/images/bgicon9.png"),
+  ];
+
+  // Background hearts animation - 100 hearts with random icons covering full screen
   const backgroundHearts = useRef(
-    Array.from({ length: 20 }, () => ({
+    Array.from({ length: 100 }, () => ({
       animValue: new Animated.Value(Math.random()),
-      x: Math.random() * 85 + 5,
-      y: Math.random() * 95 + 2,
+      x: Math.random() * 100, // Full width coverage
+      y: Math.random() * 100, // Full height coverage
       delay: Math.random() * 8000,
-      icon: `bgicon${Math.floor(Math.random() * 9) + 1}.png`, // Random bgicon1.png to bgicon9.png
+      icon: backgroundIcons[Math.floor(Math.random() * backgroundIcons.length)],
     }))
   ).current;
 
@@ -169,7 +182,7 @@ export default function AnniversaryCountdown() {
     Animated.loop(
       Animated.timing(sparkleRotation, {
         toValue: 1,
-        duration: 4000,
+        duration: 6000,
         easing: Easing.linear,
         useNativeDriver: true,
       })
@@ -331,7 +344,7 @@ export default function AnniversaryCountdown() {
               ]}
             >
               <Image
-                source={require(`../assets/images/${heart.icon}`)}
+                source={heart.icon}
                 style={styles.backgroundHeartImage}
                 resizeMode="contain"
               />
@@ -366,12 +379,20 @@ export default function AnniversaryCountdown() {
       {/* Stats Row */}
       <View style={styles.statsRow}>
         <View style={styles.statCard}>
-          <Text style={styles.statIcon}>📅</Text>
+          <Image
+            source={require("../assets/images/bgicon3.png")}
+            style={styles.statIcon}
+            resizeMode="contain"
+          />
           <Text style={styles.statNumber}>{totalYears}</Text>
           <Text style={styles.statLabel}>Years Together</Text>
         </View>
         <View style={styles.statCard}>
-          <Text style={styles.statIcon}>❤️</Text>
+          <Image
+            source={require("../assets/images/bgicon1.png")}
+            style={styles.statIcon}
+            resizeMode="contain"
+          />
           <Text style={styles.statNumber}>{totalMonths}</Text>
           <Text style={styles.statLabel}>Months Together</Text>
         </View>
@@ -379,7 +400,11 @@ export default function AnniversaryCountdown() {
 
       {/* Current Time */}
       <View style={styles.timeCard}>
-        <Text style={styles.timeIcon}>🕐</Text>
+        <Image
+          source={require("../assets/images/bgicon5.png")}
+          style={styles.timeIcon}
+          resizeMode="contain"
+        />
         <Text style={styles.timeText}>
           {currentTime.toLocaleString("en-US", {
             weekday: "long",
@@ -394,7 +419,14 @@ export default function AnniversaryCountdown() {
 
       {/* Yearly Anniversary Countdown */}
       <View style={[styles.countdownCard, styles.yearlyCard]}>
-        <Text style={styles.cardTitle}>🎉 Next Yearly Anniversary</Text>
+        <View style={styles.cardTitleContainer}>
+          <Image
+            source={require("../assets/images/bgicon7.png")}
+            style={styles.cardTitleIcon}
+            resizeMode="contain"
+          />
+          <Text style={styles.cardTitle}>Next Yearly Anniversary</Text>
+        </View>
 
         <View style={styles.progressContainer}>
           <View style={styles.progressWrapper}>
@@ -410,17 +442,22 @@ export default function AnniversaryCountdown() {
           </View>
         </View>
 
-        <View style={styles.progressInfo}>
-          <Text style={styles.progressPercentage}>
-            {yearlyProgress.toFixed(1)}% Complete
-          </Text>
-          <Text style={styles.progressSubtext}>This love year journey</Text>
-        </View>
+        <Text style={styles.progressPercentage}>
+          {yearlyProgress.toFixed(1)}% Complete
+        </Text>
+        <Text style={styles.progressSubtext}>This love year journey</Text>
       </View>
 
       {/* Monthly Anniversary Countdown */}
       <View style={[styles.countdownCard, styles.monthlyCard]}>
-        <Text style={styles.cardTitle}>💝 Next Monthly Anniversary</Text>
+        <View style={styles.cardTitleContainer}>
+          <Image
+            source={require("../assets/images/bgicon9.png")}
+            style={styles.cardTitleIcon}
+            resizeMode="contain"
+          />
+          <Text style={styles.cardTitle}>Next Monthly Anniversary</Text>
+        </View>
 
         <View style={styles.progressContainer}>
           <View style={styles.progressWrapper}>
@@ -436,22 +473,21 @@ export default function AnniversaryCountdown() {
           </View>
         </View>
 
-        <View style={styles.progressInfo}>
-          <Text style={styles.progressPercentage}>
-            {monthlyProgress.toFixed(1)}% Complete
-          </Text>
-          <Text style={styles.progressSubtext}>This month's journey</Text>
-        </View>
+        <Text style={styles.progressPercentage}>
+          {monthlyProgress.toFixed(1)}% Complete
+        </Text>
+        <Text style={styles.progressSubtext}>This month's journey</Text>
       </View>
 
       {/* Love Message */}
       <View style={styles.messageCard}>
-        <Text style={styles.giftIcon}>🎁</Text>
+        <Image
+          source={require("../assets/images/bgicon2.png")}
+          style={styles.giftIcon}
+          resizeMode="contain"
+        />
         <Text style={styles.loveMessage}>
           "Every day with you is a celebration"
-        </Text>
-        <Text style={styles.subMessage}>
-          ✨ Counting down to forever together ✨
         </Text>
       </View>
 
@@ -464,14 +500,33 @@ export default function AnniversaryCountdown() {
           ]}
         >
           <View style={styles.celebrationContent}>
-            <Text style={styles.celebrationEmoji}>🎉💖🎊</Text>
+            <View style={styles.celebrationIconsRow}>
+              <Image
+                source={require("../assets/images/bgicon7.png")}
+                style={styles.celebrationIcon}
+                resizeMode="contain"
+              />
+              <Image
+                source={require("../assets/images/bgicon1.png")}
+                style={styles.celebrationIcon}
+                resizeMode="contain"
+              />
+              <Image
+                source={require("../assets/images/bgicon9.png")}
+                style={styles.celebrationIcon}
+                resizeMode="contain"
+              />
+            </View>
             <Text style={styles.celebrationTitle}>Happy Anniversary!</Text>
             <Text style={styles.celebrationText}>
-              Celebrating another milestone in our love story! 💕
+              Celebrating another milestone in our love story!
             </Text>
           </View>
         </Animated.View>
       )}
+
+      {/* Bottom spacing for navigation bar */}
+      <View style={styles.bottomSpacing} />
     </ScrollView>
   );
 }
@@ -515,8 +570,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sparkleImage: {
-    width: 30,
-    height: 30,
+    width: 60,
+    height: 60,
   },
   statsRow: {
     flexDirection: "row",
@@ -539,7 +594,8 @@ const styles = StyleSheet.create({
     borderColor: "#f9a8d4",
   },
   statIcon: {
-    fontSize: 24,
+    width: 50,
+    height: 50,
     marginBottom: 8,
   },
   statNumber: {
@@ -569,7 +625,8 @@ const styles = StyleSheet.create({
     borderColor: "#c084fc",
   },
   timeIcon: {
-    fontSize: 18,
+    width: 50,
+    height: 50,
     marginRight: 8,
   },
   timeText: {
@@ -599,12 +656,22 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#c084fc",
   },
+  cardTitleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  cardTitleIcon: {
+    width: 50,
+    height: 50,
+    marginRight: 8,
+  },
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#831843",
     textAlign: "center",
-    marginBottom: 20,
   },
   progressContainer: {
     alignItems: "center",
@@ -628,21 +695,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#ec4899",
   },
-  progressInfo: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-    borderRadius: 15,
-    padding: 15,
-    alignItems: "center",
-  },
   progressPercentage: {
     fontSize: 16,
     fontWeight: "600",
     color: "#be185d",
+    textAlign: "center",
   },
   progressSubtext: {
     fontSize: 12,
     color: "#ec4899",
     marginTop: 2,
+    textAlign: "center",
   },
   messageCard: {
     backgroundColor: "rgba(252, 231, 243, 0.7)",
@@ -658,7 +721,8 @@ const styles = StyleSheet.create({
     borderColor: "#f9a8d4",
   },
   giftIcon: {
-    fontSize: 32,
+    width: 50,
+    height: 50,
     marginBottom: 15,
   },
   loveMessage: {
@@ -695,9 +759,16 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 10,
   },
-  celebrationEmoji: {
-    fontSize: 50,
+  celebrationIconsRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 15,
+  },
+  celebrationIcon: {
+    width: 40,
+    height: 40,
+    marginHorizontal: 5,
   },
   celebrationTitle: {
     fontSize: 22,
@@ -709,5 +780,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#ec4899",
     textAlign: "center",
+  },
+  bottomSpacing: {
+    height: 50,
   },
 });
