@@ -209,6 +209,35 @@ export default function AnniversaryCountdown() {
     }
   }, [showCelebration]);
 
+  const animY = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(animY, {
+          toValue: -4,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animY, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animY, {
+          toValue: 2,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animY, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, [animY]);
+
   // Main countdown logic
   useEffect(() => {
     const updateCountdown = () => {
@@ -418,9 +447,9 @@ export default function AnniversaryCountdown() {
       </View>
       {/* Cake Divider 1 */}
       <View style={styles.dividerContainer}>
-        <Image
+        <Animated.Image
           source={require("../assets/images/cake2.png")}
-          style={styles.cakeDivider}
+          style={[styles.cakeDivider, { transform: [{ translateY: animY }] }]}
           resizeMode="contain"
         />
       </View>
@@ -488,9 +517,9 @@ export default function AnniversaryCountdown() {
 
       {/* Cake Divider 2 */}
       <View style={styles.dividerContainer}>
-        <Image
+        <Animated.Image
           source={require("../assets/images/cake.png")}
-          style={styles.cakeDivider}
+          style={[styles.cakeDivider, { transform: [{ translateY: animY }] }]}
           resizeMode="contain"
         />
       </View>
@@ -608,6 +637,7 @@ const styles = StyleSheet.create({
     // elevation: 3,
     borderWidth: 2,
     borderColor: "#e5b4c9",
+    borderStyle: "dashed",
   },
   statIcon: {
     width: 50,
@@ -621,7 +651,7 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 12,
-    color: "#ec4899",
+    color: "#b3546f",
     textAlign: "center",
   },
   timeCard: {
@@ -639,6 +669,7 @@ const styles = StyleSheet.create({
     // elevation: 3,
     borderWidth: 2,
     borderColor: "#f4d0d0",
+    borderStyle: "dashed",
   },
   timeIcon: {
     width: 50,
@@ -653,7 +684,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   countdownCard: {
-    borderRadius: 25,
+    borderRadius: 20,
     padding: 20,
     marginBottom: 20,
     // shadowColor: "#000",
@@ -666,11 +697,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(194, 136, 155, 0.3)",
     borderWidth: 2,
     borderColor: "#c2889b",
+    borderStyle: "dashed",
   },
   monthlyCard: {
     backgroundColor: "rgba(230, 181, 202, 0.3)",
     borderWidth: 2,
     borderColor: "#e5b4c9",
+    borderStyle: "dashed",
   },
   cardTitleContainer: {
     flexDirection: "row",
@@ -709,7 +742,7 @@ const styles = StyleSheet.create({
   },
   daysLabel: {
     fontSize: 12,
-    color: "#ec4899",
+    color: "#b3546f",
   },
   progressPercentage: {
     fontSize: 16,
@@ -719,13 +752,13 @@ const styles = StyleSheet.create({
   },
   progressSubtext: {
     fontSize: 12,
-    color: "#ec4899",
+    color: "#b3546f",
     marginTop: 2,
     textAlign: "center",
   },
   messageCard: {
     backgroundColor: "rgba(245, 208, 208 , 0.5)",
-    borderRadius: 25,
+    borderRadius: 20,
     padding: 25,
     alignItems: "center",
     // shadowColor: "#000",
@@ -735,6 +768,7 @@ const styles = StyleSheet.create({
     // elevation: 3,
     borderWidth: 2,
     borderColor: "#f4d0d0",
+    borderStyle: "dashed",
   },
   giftIcon: {
     width: 50,
@@ -750,7 +784,7 @@ const styles = StyleSheet.create({
   },
   subMessage: {
     fontSize: 14,
-    color: "#ec4899",
+    color: "#b3546f",
     textAlign: "center",
   },
   celebrationModal: {
@@ -794,7 +828,7 @@ const styles = StyleSheet.create({
   },
   celebrationText: {
     fontSize: 14,
-    color: "#ec4899",
+    color: "#b3546f",
     textAlign: "center",
   },
   bottomSpacing: {
