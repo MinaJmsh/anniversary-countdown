@@ -355,7 +355,7 @@ export default function AnniversaryCountdown() {
 
       {/* Header */}
       <View style={styles.header}>
-        <Animated.View
+        {/* <Animated.View
           style={{
             transform: [{ scale: heartScale }, { translateY: floatingHeart }],
           }}
@@ -365,8 +365,7 @@ export default function AnniversaryCountdown() {
             style={styles.mainHeartImage}
             resizeMode="contain"
           />
-        </Animated.View>
-        <Text style={styles.title}>Our Love Journey</Text>
+        </Animated.View> */}
         <Animated.View style={{ transform: [{ rotate: spin }] }}>
           <Image
             source={require("../assets/images/sandglass.png")}
@@ -374,6 +373,7 @@ export default function AnniversaryCountdown() {
             resizeMode="contain"
           />
         </Animated.View>
+        <Text style={styles.title}>map anniversaries</Text>
       </View>
 
       {/* Stats Row */}
@@ -416,7 +416,14 @@ export default function AnniversaryCountdown() {
           })}
         </Text>
       </View>
-
+      {/* Cake Divider 1 */}
+      <View style={styles.dividerContainer}>
+        <Image
+          source={require("../assets/images/cake2.png")}
+          style={styles.cakeDivider}
+          resizeMode="contain"
+        />
+      </View>
       {/* Yearly Anniversary Countdown */}
       <View style={[styles.countdownCard, styles.yearlyCard]}>
         <View style={styles.cardTitleContainer}>
@@ -433,7 +440,7 @@ export default function AnniversaryCountdown() {
             <CircularProgress
               progress={yearlyProgress}
               size={140}
-              color="#ec4899"
+              color="#c1889b"
             />
             <View style={styles.progressText}>
               <Text style={styles.daysNumber}>{daysToYearly}</Text>
@@ -464,7 +471,7 @@ export default function AnniversaryCountdown() {
             <CircularProgress
               progress={monthlyProgress}
               size={140}
-              color="#a855f7"
+              color="#e5b4c9"
             />
             <View style={styles.progressText}>
               <Text style={styles.daysNumber}>{daysToMonthly}</Text>
@@ -477,6 +484,15 @@ export default function AnniversaryCountdown() {
           {monthlyProgress.toFixed(1)}% Complete
         </Text>
         <Text style={styles.progressSubtext}>This month's journey</Text>
+      </View>
+
+      {/* Cake Divider 2 */}
+      <View style={styles.dividerContainer}>
+        <Image
+          source={require("../assets/images/cake.png")}
+          style={styles.cakeDivider}
+          resizeMode="contain"
+        />
       </View>
 
       {/* Love Message */}
@@ -567,31 +583,31 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     color: "#be185d",
-    marginBottom: 10,
+    marginTop: 10,
   },
   sparkleImage: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
   },
   statsRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
   },
   statCard: {
-    backgroundColor: "rgba(252, 231, 243, 0.7)",
+    backgroundColor: "rgba(230, 181, 202, 0.3)",
     borderRadius: 20,
     padding: 20,
     alignItems: "center",
     flex: 0.48,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
     // elevation: 3,
     borderWidth: 2,
-    borderColor: "#f9a8d4",
+    borderColor: "#e5b4c9",
   },
   statIcon: {
     width: 50,
@@ -612,7 +628,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(245, 208, 208 , 0.5)",
     borderRadius: 20,
     padding: 15,
-    marginBottom: 20,
+    // marginBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -640,21 +656,21 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 20,
     marginBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.15,
+    // shadowRadius: 8,
     // elevation: 5,
   },
   yearlyCard: {
-    backgroundColor: "rgba(252, 231, 243, 0.8)",
+    backgroundColor: "rgba(194, 136, 155, 0.3)",
     borderWidth: 2,
-    borderColor: "#f9a8d4",
+    borderColor: "#c2889b",
   },
   monthlyCard: {
-    backgroundColor: "rgba(243, 232, 255, 0.8)",
+    backgroundColor: "rgba(230, 181, 202, 0.3)",
     borderWidth: 2,
-    borderColor: "#c084fc",
+    borderColor: "#e5b4c9",
   },
   cardTitleContainer: {
     flexDirection: "row",
@@ -708,17 +724,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   messageCard: {
-    backgroundColor: "rgba(252, 231, 243, 0.7)",
+    backgroundColor: "rgba(245, 208, 208 , 0.5)",
     borderRadius: 25,
     padding: 25,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 6,
     // elevation: 3,
-    borderWidth: 1,
-    borderColor: "#f9a8d4",
+    borderWidth: 2,
+    borderColor: "#f4d0d0",
   },
   giftIcon: {
     width: 50,
@@ -783,5 +799,14 @@ const styles = StyleSheet.create({
   },
   bottomSpacing: {
     height: 50,
+  },
+  // Cake dividers
+  dividerContainer: {
+    alignItems: "center",
+    marginVertical: 15,
+  },
+  cakeDivider: {
+    width: 80,
+    height: 80,
   },
 });
