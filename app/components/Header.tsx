@@ -3,7 +3,7 @@ import { Animated, Easing, Image, StyleSheet, Text, View } from "react-native";
 
 const Header: React.FC = () => {
   const heartScale = useRef(new Animated.Value(1)).current;
-  const sparkleRotation = useRef(new Animated.Value(0)).current;
+  // const sparkleRotation = useRef(new Animated.Value(0)).current;
   const floatingHeart = useRef(new Animated.Value(0)).current;
 
   // Heart beating animation
@@ -46,21 +46,34 @@ const Header: React.FC = () => {
     ).start();
   }, []);
 
-  // Sparkle rotation animation
+  // sandglass rotation animation
+  const sparkleRotation = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
+    const frames = 24; // number of steps in one spin
+    const duration = 180; // ms per frame (adjust speed)
+
     Animated.loop(
-      Animated.timing(sparkleRotation, {
-        toValue: 1,
-        duration: 6000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      })
+      Animated.sequence(
+        Array.from({ length: frames }, (_, i) =>
+          Animated.timing(sparkleRotation, {
+            toValue: i + 1,
+            duration,
+            easing: Easing.step0,
+            useNativeDriver: true,
+          })
+        )
+      )
     ).start();
   }, []);
 
+  const frames = 24;
   const spin = sparkleRotation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"],
+    inputRange: Array.from({ length: frames + 1 }, (_, i) => i),
+    outputRange: Array.from(
+      { length: frames + 1 },
+      (_, i) => `${(360 / frames) * i}deg`
+    ),
   });
 
   return (

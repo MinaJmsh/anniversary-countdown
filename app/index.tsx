@@ -8,13 +8,12 @@ import {
 } from "react-native";
 
 import BackgroundHearts from "./components/BackgroundHearts";
+import ButtonsRow from "./components/ButtonsRow";
 import CelebrationModal from "./components/CelebrationModal";
 import CountdownCard from "./components/CountdownCard";
-import DateIdeasButton from "./components/DateIdeasButton";
 import Header from "./components/Header";
 import LoveMessage from "./components/LoveMessage";
 import StatsRow from "./components/StatsRow";
-import SurpriseButton from "./components/SurpriseButton";
 import TimeCard from "./components/TimeCard";
 
 const { width } = Dimensions.get("window");
@@ -188,9 +187,7 @@ export default function AnniversaryCountdown() {
       />
 
       {/* Interactive Buttons Section */}
-      <SurpriseButton />
-
-      <DateIdeasButton />
+      <ButtonsRow />
 
       {/* Cake Divider 2 */}
       <View style={styles.dividerContainer}>
