@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import {
   Animated,
   Image,
+  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -73,35 +74,53 @@ const SurpriseButton: React.FC<SurpriseButtonProps> = ({ onPress, style }) => {
     if (onPress) onPress();
   };
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Image
-        source={require("../../assets/images/bgicon4.png")}
-        style={styles.buttonIcon}
-      />
-      <Text style={styles.buttonText}>Surprise Me!</Text>
-      <Text style={styles.buttonSubtext}>Random romantic idea</Text>
+    <TouchableOpacity style={[styles.touchable, style]} onPress={handlePress}>
+      <ImageBackground
+        source={require("../../assets/images/sqrbtn.png")}
+        style={styles.bg}
+        imageStyle={styles.bgImage}
+        resizeMode="contain" // show full PNG as the button box
+      >
+        <Image
+          source={require("../../assets/images/bgicon4.png")}
+          style={styles.buttonIcon}
+          resizeMode="contain"
+        />
+        <Text style={styles.buttonText}>Surprise Me!</Text>
+        <Text style={styles.buttonSubtext}>cheezy love quotes</Text>
+      </ImageBackground>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    width: "100%", // fill wrapper
-    padding: 20,
+  touchable: {
+    flex: 0.48, // half of row
+    aspectRatio: 1, // square
+  },
+  bg: {
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+  },
+  bgImage: {
+    width: "100%",
+    height: "100%",
   },
   buttonIcon: {
-    width: 50,
-    height: 50,
-    marginBottom: 8,
+    width: 32,
+    height: 32,
+    marginBottom: 6,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
     color: "#be185d",
+    textAlign: "center",
   },
   buttonSubtext: {
-    fontSize: 12,
+    fontSize: 11,
     color: "#b3546f",
     textAlign: "center",
   },

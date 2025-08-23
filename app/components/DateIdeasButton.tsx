@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import {
   Animated,
   Image,
+  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -115,42 +116,54 @@ const DateIdeasButton: React.FC<DateIdeasButtonProps> = ({
     if (onPress) onPress();
   };
 
-  const slideY = slideAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [50, 0],
-  });
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Image
-        source={require("../../assets/images/bgicon6.png")}
-        style={styles.buttonIcon}
-        resizeMode="contain"
-      />
-      <Text style={styles.buttonText}>Date Ideas</Text>
-      <Text style={styles.buttonSubtext}>Perfect plans for you two</Text>
+    <TouchableOpacity style={[styles.touchable, style]} onPress={handlePress}>
+      <ImageBackground
+        source={require("../../assets/images/sqrbtn.png")}
+        style={styles.bg}
+        imageStyle={styles.bgImage}
+        resizeMode="contain" // PNG is the box
+      >
+        <Image
+          source={require("../../assets/images/bgicon6.png")}
+          style={styles.buttonIcon}
+          resizeMode="contain"
+        />
+        <Text style={styles.buttonText}>Date Ideas</Text>
+        <Text style={styles.buttonSubtext}>Perfect plans for us</Text>
+      </ImageBackground>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    width: "100%", // fills wrapper for 50/50 layout
-    padding: 20,
+  touchable: {
+    flex: 0.48, // half of row
+    aspectRatio: 1, // square
+  },
+  bg: {
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+  },
+  bgImage: {
+    width: "100%",
+    height: "100%",
   },
   buttonIcon: {
-    width: 50,
-    height: 50,
-    marginBottom: 8,
+    width: 32,
+    height: 32,
+    marginBottom: 6,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
     color: "#be185d",
     textAlign: "center",
   },
   buttonSubtext: {
-    fontSize: 12,
+    fontSize: 11,
     color: "#b3546f",
     textAlign: "center",
   },

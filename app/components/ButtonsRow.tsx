@@ -43,14 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonCard: {
-    flex: 0.48, // just like statCard for 50/50 width
-    backgroundColor: "rgba(230, 181, 202, 0.3)",
-    borderRadius: 20,
-    padding: 20,
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#e5b4c9",
-    borderStyle: "dashed",
+    flex: 0.48, // 50% of row
+    aspectRatio: 1, // square
   },
 });
 
