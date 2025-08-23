@@ -17,6 +17,7 @@ interface QuotePopupProps {
 const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
   const [currentQuote, setCurrentQuote] = useState("");
   const scaleAnim = useRef(new Animated.Value(0)).current;
+  const floatAnim = useRef(new Animated.Value(0)).current;
   const sparkleRotation = useRef(new Animated.Value(0)).current;
 
   const loveQuotes = [
@@ -51,13 +52,20 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
         useNativeDriver: true,
       }).start();
 
-      // Start sparkle rotation
+      // Start floating animation
       Animated.loop(
-        Animated.timing(sparkleRotation, {
-          toValue: 1,
-          duration: 3000,
-          useNativeDriver: true,
-        })
+        Animated.sequence([
+          Animated.timing(floatAnim, {
+            toValue: 1,
+            duration: 2000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(floatAnim, {
+            toValue: 0,
+            duration: 2000,
+            useNativeDriver: true,
+          }),
+        ])
       ).start();
     } else {
       scaleAnim.setValue(0);
@@ -77,6 +85,10 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
     inputRange: [0, 1],
     outputRange: ["0deg", "360deg"],
   });
+  const floatY = floatAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -8],
+  });
 
   return (
     <Modal transparent visible={visible} animationType="fade">
@@ -84,31 +96,31 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
         <Animated.View
           style={[styles.popup, { transform: [{ scale: scaleAnim }] }]}
         >
-          {/* Decorative sparkles */}
-          <View style={styles.sparklesContainer}>
+          {/* Floating decorative elements */}
+          <View style={styles.decorativeContainer}>
             <Animated.View
               style={[
-                styles.sparkle,
-                styles.sparkle1,
-                { transform: [{ rotate: spin }] },
+                styles.floatingIcon,
+                styles.floatingIcon1,
+                { transform: [{ translateY: floatY }] },
               ]}
             >
               <Image
-                source={require("../../assets/images/bgicon5.png")}
-                style={styles.sparkleIcon}
+                source={require("../../assets/images/bgicon8.png")}
+                style={styles.decorativeIcon}
                 resizeMode="contain"
               />
             </Animated.View>
             <Animated.View
               style={[
-                styles.sparkle,
-                styles.sparkle2,
-                { transform: [{ rotate: spin }] },
+                styles.floatingIcon,
+                styles.floatingIcon2,
+                { transform: [{ translateY: floatY }] },
               ]}
             >
               <Image
                 source={require("../../assets/images/bgicon8.png")}
-                style={styles.sparkleIcon}
+                style={styles.decorativeIcon}
                 resizeMode="contain"
               />
             </Animated.View>
@@ -116,17 +128,17 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
 
           {/* Header with heart icons */}
           <View style={styles.header}>
-            <Image
+            {/* <Image
               source={require("../../assets/images/bgicon1.png")}
               style={styles.headerIcon}
               resizeMode="contain"
-            />
+            /> */}
             <Text style={styles.title}>Love Quote</Text>
-            <Image
+            {/* <Image
               source={require("../../assets/images/bgicon1.png")}
               style={styles.headerIcon}
               resizeMode="contain"
-            />
+            /> */}
           </View>
 
           {/* Quote content */}
@@ -141,7 +153,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
               style={styles.closeIcon}
               resizeMode="contain"
             />
-            <Text style={styles.closeText}>Got it! 💕</Text>
+            <Text style={styles.closeText}>Got it!</Text>
           </TouchableOpacity>
         </Animated.View>
       </View>
@@ -214,13 +226,13 @@ const styles = StyleSheet.create({
     color: "#be185d",
   },
   quoteContainer: {
-    backgroundColor: "rgba(245, 208, 208, 0.5)",
+    // backgroundColor: "rgba(245, 208, 208, 0.5)",
     borderRadius: 15,
     padding: 20,
     marginBottom: 25,
-    borderWidth: 2,
-    borderColor: "#f4d0d0",
-    borderStyle: "dashed",
+    // borderWidth: 2,
+    // borderColor: "#f4d0d0",
+    // borderStyle: "dashed",
   },
   quoteText: {
     fontSize: 16,
@@ -250,6 +262,31 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#be185d",
+  },
+  decorativeContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  floatingIcon: {
+    position: "absolute",
+    width: 35,
+    height: 35,
+  },
+  floatingIcon1: {
+    top: 20,
+    right: 20,
+  },
+  floatingIcon2: {
+    bottom: 20,
+    left: 20,
+  },
+  decorativeIcon: {
+    width: "100%",
+    height: "100%",
+    opacity: 0.4,
   },
 });
 

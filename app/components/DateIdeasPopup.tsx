@@ -163,17 +163,17 @@ const DateIdeasPopup: React.FC<DateIdeasPopupProps> = ({
 
           {/* Header */}
           <View style={styles.header}>
-            <Image
+            {/* <Image
               source={require("../../assets/images/bgicon6.png")}
               style={styles.headerIcon}
               resizeMode="contain"
-            />
+            /> */}
             <Text style={styles.title}>Perfect Date Ideas</Text>
-            <Image
+            {/* <Image
               source={require("../../assets/images/bgicon1.png")}
               style={styles.headerIcon}
               resizeMode="contain"
-            />
+            /> */}
           </View>
 
           {/* Ideas list */}
@@ -195,7 +195,7 @@ const DateIdeasPopup: React.FC<DateIdeasPopupProps> = ({
               style={styles.closeIcon}
               resizeMode="contain"
             />
-            <Text style={styles.closeText}>Let's do this! ✨</Text>
+            <Text style={styles.closeText}>Let's do this!</Text>
           </TouchableOpacity>
         </Animated.View>
       </View>
