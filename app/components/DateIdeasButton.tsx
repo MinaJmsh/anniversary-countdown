@@ -2,10 +2,10 @@ import React, { useRef, useState } from "react";
 import {
   Animated,
   Image,
-  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 
 interface DateIdeasButtonProps {
@@ -118,12 +118,12 @@ const DateIdeasButton: React.FC<DateIdeasButtonProps> = ({
 
   return (
     <TouchableOpacity style={[styles.touchable, style]} onPress={handlePress}>
-      <ImageBackground
+      <Image
         source={require("../../assets/images/sqrbtn.png")}
-        style={styles.bg}
-        imageStyle={styles.bgImage}
-        resizeMode="contain" // PNG is the box
-      >
+        style={styles.bg} // now absolute
+        resizeMode="contain"
+      />
+      <View style={styles.content}>
         <Image
           source={require("../../assets/images/bgicon6.png")}
           style={styles.buttonIcon}
@@ -131,29 +131,39 @@ const DateIdeasButton: React.FC<DateIdeasButtonProps> = ({
         />
         <Text style={styles.buttonText}>Date Ideas</Text>
         <Text style={styles.buttonSubtext}>Perfect plans for us</Text>
-      </ImageBackground>
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   touchable: {
-    flex: 0.48, // half of row
-    aspectRatio: 1, // square
-  },
-  bg: {
-    flex: 1,
-    alignItems: "center",
+    flex: 0.48,
+    aspectRatio: 1,
     justifyContent: "center",
+    alignItems: "center",
+  },
+
+  bg: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     padding: 8,
   },
+
   bgImage: {
     width: "100%",
     height: "100%",
   },
   buttonIcon: {
-    width: 32,
-    height: 32,
+    width: 50,
+    height: 50,
     marginBottom: 6,
   },
   buttonText: {

@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonCard: {
-    flex: 0.48, // 50% of row
-    aspectRatio: 1, // square
+    flex: 1,
   },
 });
 

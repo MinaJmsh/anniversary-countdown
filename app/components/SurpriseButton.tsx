@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 interface SurpriseButtonProps {
   onPress: () => void;
@@ -81,13 +82,15 @@ const SurpriseButton: React.FC<SurpriseButtonProps> = ({ onPress, style }) => {
         imageStyle={styles.bgImage}
         resizeMode="contain" // show full PNG as the button box
       >
-        <Image
-          source={require("../../assets/images/bgicon4.png")}
-          style={styles.buttonIcon}
-          resizeMode="contain"
-        />
-        <Text style={styles.buttonText}>Surprise Me!</Text>
-        <Text style={styles.buttonSubtext}>cheezy love quotes</Text>
+        <View style={styles.content}>
+          <Image
+            source={require("../../assets/images/bgicon4.png")}
+            style={styles.buttonIcon}
+            resizeMode="contain"
+          />
+          <Text style={styles.buttonText}>Surprise Me!</Text>
+          <Text style={styles.buttonSubtext}>cheezy love quotes</Text>
+        </View>
       </ImageBackground>
     </TouchableOpacity>
   );
@@ -95,22 +98,32 @@ const SurpriseButton: React.FC<SurpriseButtonProps> = ({ onPress, style }) => {
 
 const styles = StyleSheet.create({
   touchable: {
-    flex: 0.48, // half of row
-    aspectRatio: 1, // square
-  },
-  bg: {
-    flex: 1,
-    alignItems: "center",
+    flex: 0.48,
+    aspectRatio: 1,
     justifyContent: "center",
+    alignItems: "center",
+  },
+
+  bg: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     padding: 8,
   },
+
   bgImage: {
     width: "100%",
     height: "100%",
   },
   buttonIcon: {
-    width: 32,
-    height: 32,
+    width: 50,
+    height: 50,
     marginBottom: 6,
   },
   buttonText: {

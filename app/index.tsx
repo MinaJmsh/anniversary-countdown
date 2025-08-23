@@ -9,7 +9,6 @@ import {
 
 import BackgroundHearts from "./components/BackgroundHearts";
 import ButtonsRow from "./components/ButtonsRow";
-import CelebrationModal from "./components/CelebrationModal";
 import CountdownCard from "./components/CountdownCard";
 import Header from "./components/Header";
 import LoveMessage from "./components/LoveMessage";
@@ -175,12 +174,6 @@ export default function AnniversaryCountdown() {
       </View>
 
       <CountdownCard
-        type="yearly"
-        days={daysToYearly}
-        progress={yearlyProgress}
-      />
-
-      <CountdownCard
         type="monthly"
         days={daysToMonthly}
         progress={monthlyProgress}
@@ -197,13 +190,18 @@ export default function AnniversaryCountdown() {
           resizeMode="contain"
         />
       </View>
+      <CountdownCard
+        type="yearly"
+        days={daysToYearly}
+        progress={yearlyProgress}
+      />
 
       <LoveMessage />
-
+      {/* 
       <CelebrationModal
         showCelebration={showCelebration}
         setShowCelebration={setShowCelebration}
-      />
+      /> */}
 
       {/* Bottom spacing for navigation bar */}
       <View style={styles.bottomSpacing} />

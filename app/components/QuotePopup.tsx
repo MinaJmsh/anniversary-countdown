@@ -21,21 +21,21 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
   const sparkleRotation = useRef(new Animated.Value(0)).current;
 
   const loveQuotes = [
-    '💕 "Every love story is beautiful, but ours is my favorite."',
-    '🌟 "In all the world, there is no heart for me like yours."',
-    '💖 "You are my today and all of my tomorrows."',
-    '🌹 "Being deeply loved gives you strength, loving deeply gives you courage."',
-    '✨ "I love you not only for what you are, but for what I am when I am with you."',
-    '💫 "You are the source of my joy, the center of my world."',
-    '🦋 "Together is a wonderful place to be."',
-    '🌸 "Love is not just looking at each other, it\'s looking in the same direction."',
-    '💝 "You make my heart skip a beat and fill my soul with happiness."',
-    '🌺 "In you, I\'ve found the love of my life and my closest truest friend."',
-    '💞 "Every day I love you more than yesterday, less than tomorrow."',
-    '🌈 "You are my sunshine on a cloudy day."',
-    '🎀 "Love is composed of a single soul inhabiting two bodies."',
-    '🦄 "You are my happy place, my safe haven, my everything."',
-    '🌙 "I choose you, and I\'ll choose you over and over, without pause."',
+    // "With you, even silence feels full.",
+    "You make the ordinary feel rare.",
+    // "I don’t want perfect, I want us.",
+    "The best part of my day is knowing it ends with you.",
+    "You’re my favorite decision.",
+    "I’d choose your hand in a crowd every time.",
+    // "Nothing feels as steady as your presence.",
+    // "You turn moments into memories without even trying.",
+    "You make me want to stay, always.",
+    "Every version of me is better next to you.",
+    // "You’re the calm in my restless mind.",
+    "If I get one lifetime, I’m glad it’s with you.",
+    "You make love feel simple.",
+    // "The world feels less sharp when you’re near.",
+    // "I don’t need more—I just need you.",
   ];
 
   useEffect(() => {
@@ -133,7 +133,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ visible, onClose }) => {
               style={styles.headerIcon}
               resizeMode="contain"
             /> */}
-            <Text style={styles.title}>Love Quote</Text>
+            <Text style={styles.title}>Cheezy Love Quote</Text>
             {/* <Image
               source={require("../../assets/images/bgicon1.png")}
               style={styles.headerIcon}
