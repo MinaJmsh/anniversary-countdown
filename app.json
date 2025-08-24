@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "mina-countdown",
-    "slug": "mina-countdown",
+    "name": "map anniversaries",
+    "slug": "map-anniversaries",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/app-icon.png",
     "scheme": "minacountdown",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/app-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.mina02.mapanniversaries"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d6706b75-14ea-4349-8c38-6dafcf854caf"
+      }
     }
   }
 }
