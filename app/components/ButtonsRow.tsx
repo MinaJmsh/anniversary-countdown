@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import DateIdeasButton from "./DateIdeasButton";
 import DateIdeasPopup from "./DateIdeasPopup";
-import QuotePopup from "./QuotePopup";
+import SpinWheelPopup from "./SpinWheelPopup";
 import SurpriseButton from "./SurpriseButton";
 
 const ButtonsRow: React.FC = () => {
-  const [showQuotePopup, setShowQuotePopup] = useState(false);
+  const [showSpinWheelPopup, setShowSpinWheelPopup] = useState(false);
   const [showDateIdeasPopup, setShowDateIdeasPopup] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ const ButtonsRow: React.FC = () => {
       <View style={styles.buttonsRow}>
         <SurpriseButton
           style={styles.buttonCard}
-          onPress={() => setShowQuotePopup(true)}
+          onPress={() => setShowSpinWheelPopup(true)}
         />
         <DateIdeasButton
           style={styles.buttonCard}
@@ -22,9 +22,9 @@ const ButtonsRow: React.FC = () => {
         />
       </View>
 
-      <QuotePopup
-        visible={showQuotePopup}
-        onClose={() => setShowQuotePopup(false)}
+      <SpinWheelPopup
+        visible={showSpinWheelPopup}
+        onClose={() => setShowSpinWheelPopup(false)}
       />
       <DateIdeasPopup
         visible={showDateIdeasPopup}
@@ -41,9 +41,10 @@ const styles = StyleSheet.create({
   buttonsRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    gap: 10, // Add some gap between buttons
   },
   buttonCard: {
-    flex: 1,
+    flex: 0.48, // 50/50 width with some gap
   },
 });
 
