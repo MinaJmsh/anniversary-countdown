@@ -166,10 +166,10 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
 
   const getWheelSliceColor = (index: number) => {
     const colors = [
-      "rgba(190, 24, 93, 0.8)", // Pink
-      "rgba(194, 136, 155, 0.8)", // Light pink
-      "rgba(230, 181, 202, 0.8)", // Very light pink
-      "rgba(244, 208, 208, 0.8)", // Pale pink
+      "rgba(255,225,237, 0.8)", // Light pink
+      "rgba(252,215,215, 0.8)", // Pink
+      "rgba(236,186,208, 0.8)", // Very light pink
+      "rgba(199,140,160, 0.8)", // Pale pink
     ];
     return colors[index % colors.length];
   };
@@ -235,75 +235,104 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
                       }, // <- center + rotate
                     ]}
                   >
-                    {wheelOptions.map((option, index) => {
-                      const degreesPerSlice = 360 / wheelOptions.length;
-                      const startAngle = index * degreesPerSlice;
-                      const endAngle = startAngle + degreesPerSlice;
+                    {wheelOptions.length === 1 ? (
+                      // Single option: full circle
+                      <svg
+                        viewBox="0 0 200 200"
+                        width="100%"
+                        height="100%"
+                        style={styles.sliceSvg}
+                      >
+                        <circle
+                          cx="100"
+                          cy="100"
+                          r="90"
+                          fill={getWheelSliceColor(0)}
+                          stroke="#be185d"
+                          strokeWidth="1"
+                        />
+                        <text
+                          x="100"
+                          y="100"
+                          fill="#be185d"
+                          fontSize="12"
+                          fontWeight="bold"
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                        >
+                          {wheelOptions[0].length > 15
+                            ? wheelOptions[0].substring(0, 12) + "..."
+                            : wheelOptions[0]}
+                        </text>
+                      </svg>
+                    ) : (
+                      wheelOptions.map((option, index) => {
+                        const degreesPerSlice = 360 / wheelOptions.length;
+                        const startAngle = index * degreesPerSlice;
+                        const endAngle = startAngle + degreesPerSlice;
 
-                      // Create SVG path for pie slice
-                      const radius = 90; // Wheel radius minus border
-                      const centerX = 100;
-                      const centerY = 100;
+                        const radius = 90;
+                        const centerX = 100;
+                        const centerY = 100;
 
-                      // Calculate start and end points
-                      const startAngleRad = ((startAngle - 90) * Math.PI) / 180; // -90 to start from top
-                      const endAngleRad = ((endAngle - 90) * Math.PI) / 180;
+                        const startAngleRad =
+                          ((startAngle - 90) * Math.PI) / 180;
+                        const endAngleRad = ((endAngle - 90) * Math.PI) / 180;
 
-                      const x1 = centerX + radius * Math.cos(startAngleRad);
-                      const y1 = centerY + radius * Math.sin(startAngleRad);
-                      const x2 = centerX + radius * Math.cos(endAngleRad);
-                      const y2 = centerY + radius * Math.sin(endAngleRad);
+                        const x1 = centerX + radius * Math.cos(startAngleRad);
+                        const y1 = centerY + radius * Math.sin(startAngleRad);
+                        const x2 = centerX + radius * Math.cos(endAngleRad);
+                        const y2 = centerY + radius * Math.sin(endAngleRad);
 
-                      const largeArcFlag = degreesPerSlice > 180 ? 1 : 0;
+                        const largeArcFlag = degreesPerSlice > 180 ? 1 : 0;
 
-                      const pathData = [
-                        `M ${centerX} ${centerY}`, // Move to center
-                        `L ${x1} ${y1}`, // Line to start point
-                        `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`, // Arc to end point
-                        "Z", // Close path
-                      ].join(" ");
+                        const pathData = [
+                          `M ${centerX} ${centerY}`,
+                          `L ${x1} ${y1}`,
+                          `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+                          "Z",
+                        ].join(" ");
 
-                      // Calculate text position (middle of slice)
-                      const textAngle = startAngle + degreesPerSlice / 2 - 90;
-                      const textAngleRad = (textAngle * Math.PI) / 180;
-                      const textRadius = radius * 0.6;
-                      const textX =
-                        centerX + textRadius * Math.cos(textAngleRad);
-                      const textY =
-                        centerY + textRadius * Math.sin(textAngleRad);
+                        const textAngle = startAngle + degreesPerSlice / 2 - 90;
+                        const textAngleRad = (textAngle * Math.PI) / 180;
+                        const textRadius = radius * 0.6;
+                        const textX =
+                          centerX + textRadius * Math.cos(textAngleRad);
+                        const textY =
+                          centerY + textRadius * Math.sin(textAngleRad);
 
-                      return (
-                        <View key={index} style={styles.sliceContainer}>
-                          {/* Fill the wheel and pin coordinates with a viewBox */}
-                          <svg
-                            viewBox="0 0 200 200"
-                            width="100%"
-                            height="100%"
-                            style={styles.sliceSvg}
-                          >
-                            <path
-                              d={pathData}
-                              fill={getWheelSliceColor(index)}
-                              stroke="#be185d"
-                              strokeWidth="1"
-                            />
-                            <text
-                              x={textX}
-                              y={textY}
-                              fill="white"
-                              fontSize="10"
-                              fontWeight="bold"
-                              textAnchor="middle"
-                              dominantBaseline="middle"
+                        return (
+                          <View key={index} style={styles.sliceContainer}>
+                            <svg
+                              viewBox="0 0 200 200"
+                              width="100%"
+                              height="100%"
+                              style={styles.sliceSvg}
                             >
-                              {option.length > 15
-                                ? option.substring(0, 12) + "..."
-                                : option}
-                            </text>
-                          </svg>
-                        </View>
-                      );
-                    })}
+                              <path
+                                d={pathData}
+                                fill={getWheelSliceColor(index)}
+                                stroke="#be185d"
+                                strokeWidth="1"
+                              />
+                              <text
+                                x={textX}
+                                y={textY}
+                                fill="#be185d"
+                                fontSize="10"
+                                fontWeight="bold"
+                                textAnchor="middle"
+                                dominantBaseline="middle"
+                              >
+                                {option.length > 15
+                                  ? option.substring(0, 12) + "..."
+                                  : option}
+                              </text>
+                            </svg>
+                          </View>
+                        );
+                      })
+                    )}
 
                     <View style={styles.wheelCenter}>
                       <Image
@@ -373,7 +402,7 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
                   onPress={addCustomOption}
                   disabled={!customInput.trim() || wheelOptions.length >= 8}
                 >
-                  <Text style={styles.addButtonText}>+</Text>
+                  <Text style={styles.addButtonText}>✚</Text>
                 </TouchableOpacity>
               </View>
 
@@ -424,7 +453,7 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
                         style={styles.removeButton}
                         onPress={() => removeFromWheel(index)}
                       >
-                        <Text style={styles.removeButtonText}>×</Text>
+                        <Text style={styles.removeButtonText}>✕</Text>
                       </TouchableOpacity>
                     </View>
                   ))}
@@ -674,7 +703,7 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
   },
   subsectionTitle: {
@@ -730,14 +759,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: 24,
     height: 24,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "center", // vertical centering
+    alignItems: "center", // horizontal centering
   },
   removeButtonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
   },
+
   closeButton: {
     backgroundColor: "rgba(194, 136, 155, 0.3)",
     borderRadius: 15,
