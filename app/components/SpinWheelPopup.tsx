@@ -692,14 +692,14 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   addButton: {
-    backgroundColor: "#be185d",
+    backgroundColor: "#c78ca0",
     borderRadius: 10,
     width: 40,
     justifyContent: "center",
     alignItems: "center",
   },
   addButtonDisabled: {
-    backgroundColor: "rgba(190, 24, 93, 0.4)",
+    backgroundColor: "rgba(199, 139, 159, 0.4)",
   },
   addButtonText: {
     color: "white",
@@ -716,7 +716,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   quickAddButton: {
-    backgroundColor: "rgba(230, 181, 202, 0.5)",
+    backgroundColor: "rgba(199, 139, 159, 0.3)",
     borderRadius: 12,
     paddingVertical: 6,
     paddingHorizontal: 10,
@@ -725,10 +725,10 @@ const styles = StyleSheet.create({
     borderColor: "#e5b4c9",
   },
   quickAddButtonAdded: {
-    backgroundColor: "rgba(190, 24, 93, 0.8)",
+    backgroundColor: "rgba(199, 139, 159,1 )",
   },
   quickAddButtonDisabled: {
-    backgroundColor: "rgba(230, 181, 202, 0.2)",
+    backgroundColor: "rgba(199, 139, 159, 0.1)",
   },
   quickAddButtonText: {
     fontSize: 12,
@@ -755,7 +755,7 @@ const styles = StyleSheet.create({
     color: "#831843",
   },
   removeButton: {
-    backgroundColor: "#be185d",
+    backgroundColor: "#c78ca0",
     borderRadius: 12,
     width: 24,
     height: 24,
