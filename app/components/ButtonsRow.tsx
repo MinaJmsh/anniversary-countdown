@@ -3,8 +3,6 @@ import { StyleSheet, View } from "react-native";
 import DateIdeasButton from "./DateIdeasButton";
 import DateIdeasPopup from "./DateIdeasPopup";
 import QuotePopup from "./QuotePopup";
-import SpinWheelButton from "./SpinWheelButton";
-import SpinWheelPopup from "./SpinWheelPopup";
 import SurpriseButton from "./SurpriseButton";
 
 const ButtonsRow: React.FC = () => {
@@ -26,7 +24,7 @@ const ButtonsRow: React.FC = () => {
       </View>
 
       {/* new rectangle button */}
-      <SpinWheelButton onPress={() => setShowSpinWheel(true)} />
+      {/* <SpinWheelButton onPress={() => setShowSpinWheel(true)} /> */}
 
       <QuotePopup
         visible={showQuotePopup}
@@ -36,10 +34,10 @@ const ButtonsRow: React.FC = () => {
         visible={showDateIdeasPopup}
         onClose={() => setShowDateIdeasPopup(false)}
       />
-      <SpinWheelPopup
+      {/* <SpinWheelPopup
         visible={showSpinWheel}
         onClose={() => setShowSpinWheel(false)}
-      />
+      /> */}
     </View>
   );
 };

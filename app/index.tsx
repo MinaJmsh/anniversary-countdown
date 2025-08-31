@@ -12,6 +12,8 @@ import ButtonsRow from "./components/ButtonsRow";
 import CountdownCard from "./components/CountdownCard";
 import Header from "./components/Header";
 import LoveMessage from "./components/LoveMessage";
+import SpinWheelButton from "./components/SpinWheelButton";
+import SpinWheelPopup from "./components/SpinWheelPopup";
 import StatsRow from "./components/StatsRow";
 import TimeCard from "./components/TimeCard";
 
@@ -27,6 +29,7 @@ export default function AnniversaryCountdown() {
   const [totalMonths, setTotalMonths] = useState(0);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showSpinWheel, setShowSpinWheel] = useState(false);
 
   // Animation values
   const animY = useRef(new Animated.Value(0)).current;
@@ -161,7 +164,6 @@ export default function AnniversaryCountdown() {
       <Header />
 
       <StatsRow totalYears={totalYears} totalMonths={totalMonths} />
-
       <TimeCard currentTime={currentTime} />
 
       {/* Cake Divider 1 */}
@@ -179,8 +181,12 @@ export default function AnniversaryCountdown() {
         progress={monthlyProgress}
       />
 
-      {/* Interactive Buttons Section */}
-      <ButtonsRow />
+      {/* new rectangle button */}
+      <SpinWheelButton onPress={() => setShowSpinWheel(true)} />
+      <SpinWheelPopup
+        visible={showSpinWheel}
+        onClose={() => setShowSpinWheel(false)}
+      />
 
       {/* Cake Divider 2 */}
       <View style={styles.dividerContainer}>
@@ -196,11 +202,13 @@ export default function AnniversaryCountdown() {
         progress={yearlyProgress}
       />
 
+      {/* Interactive Buttons Section */}
+      <ButtonsRow />
       <LoveMessage />
       {/* 
       <CelebrationModal
-        showCelebration={showCelebration}
-        setShowCelebration={setShowCelebration}
+      showCelebration={showCelebration}
+      setShowCelebration={setShowCelebration}
       /> */}
 
       {/* Bottom spacing for navigation bar */}
