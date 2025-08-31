@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Svg, { Circle, Path, Text as SvgText } from "react-native-svg";
 
 interface SpinWheelPopupProps {
   visible: boolean;
@@ -232,18 +233,18 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
                           { translateY: -100 },
                           { rotate: spin },
                         ],
-                      }, // <- center + rotate
+                      },
                     ]}
                   >
                     {wheelOptions.length === 1 ? (
                       // Single option: full circle
-                      <svg
+                      <Svg
                         viewBox="0 0 200 200"
                         width="100%"
                         height="100%"
                         style={styles.sliceSvg}
                       >
-                        <circle
+                        <Circle
                           cx="100"
                           cy="100"
                           r="90"
@@ -251,20 +252,20 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
                           stroke="#be185d"
                           strokeWidth="1"
                         />
-                        <text
+                        <SvgText
                           x="100"
                           y="100"
                           fill="#be185d"
                           fontSize="12"
                           fontWeight="bold"
                           textAnchor="middle"
-                          dominantBaseline="middle"
+                          alignmentBaseline="middle"
                         >
                           {wheelOptions[0].length > 15
                             ? wheelOptions[0].substring(0, 12) + "..."
                             : wheelOptions[0]}
-                        </text>
-                      </svg>
+                        </SvgText>
+                      </Svg>
                     ) : (
                       wheelOptions.map((option, index) => {
                         const degreesPerSlice = 360 / wheelOptions.length;
@@ -303,32 +304,32 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
 
                         return (
                           <View key={index} style={styles.sliceContainer}>
-                            <svg
+                            <Svg
                               viewBox="0 0 200 200"
                               width="100%"
                               height="100%"
                               style={styles.sliceSvg}
                             >
-                              <path
+                              <Path
                                 d={pathData}
                                 fill={getWheelSliceColor(index)}
                                 stroke="#be185d"
                                 strokeWidth="1"
                               />
-                              <text
+                              <SvgText
                                 x={textX}
                                 y={textY}
                                 fill="#be185d"
                                 fontSize="10"
                                 fontWeight="bold"
                                 textAnchor="middle"
-                                dominantBaseline="middle"
+                                alignmentBaseline="middle"
                               >
                                 {option.length > 15
                                   ? option.substring(0, 12) + "..."
                                   : option}
-                              </text>
-                            </svg>
+                              </SvgText>
+                            </Svg>
                           </View>
                         );
                       })
