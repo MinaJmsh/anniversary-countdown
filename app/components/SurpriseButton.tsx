@@ -18,24 +18,6 @@ const SurpriseButton: React.FC<SurpriseButtonProps> = ({ onPress, style }) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const surprises = [
-    "💕 Leave a sweet note in their favorite book",
-    "🌟 Plan a stargazing night together",
-    "☕ Make their favorite drink and surprise them",
-    "📸 Create a photo collage of your memories",
-    "🎵 Make a playlist of songs that remind you of them",
-    "🌸 Pick flowers from your garden (or buy some!)",
-    "💌 Write them a handwritten love letter",
-    "🍰 Bake their favorite dessert together",
-    "🌅 Watch the sunrise or sunset together",
-    "💭 Share three things you love about them today",
-    "🎨 Draw or paint something special for them",
-    "🍕 Order from the restaurant of your first date",
-    "🎁 Hide little love notes around the house",
-    "💃 Have a dance party in your living room",
-    "📚 Read a book together chapter by chapter",
-  ];
-
   const handlePress = () => {
     // Button press animation
     Animated.sequence([
@@ -50,12 +32,6 @@ const SurpriseButton: React.FC<SurpriseButtonProps> = ({ onPress, style }) => {
         useNativeDriver: true,
       }),
     ]).start();
-
-    // Random surprise
-    const randomSurprise =
-      surprises[Math.floor(Math.random() * surprises.length)];
-    setCurrentSurprise(randomSurprise);
-    setShowSurprise(true);
 
     Animated.timing(fadeAnim, {
       toValue: 1,
