@@ -20,7 +20,7 @@ const SpinWheelButton: React.FC<SpinWheelButtonProps> = ({
   return (
     <TouchableOpacity style={[styles.touchable, style]} onPress={onPress}>
       <ImageBackground
-        source={require("../../assets/images/rctbtn2.png")}
+        source={require("../../assets/images/rctbtn3.png")}
         style={styles.bg}
         imageStyle={styles.bgImage}
         resizeMode="stretch"
@@ -41,16 +41,17 @@ const SpinWheelButton: React.FC<SpinWheelButtonProps> = ({
 
 const styles = StyleSheet.create({
   touchable: {
-    width: "100%", // always full width
-    height: 150, // fixed height you want
+    width: "100%", // full width
+    aspectRatio: 320 / 150, // width : height = ~2.133
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
   },
 
   image: {
-    width: "100%", // stretch to full width
-    height: "100%", // fill container height
+    width: "100%",
+    height: "100%",
+    resizeMode: "stretch", // or "contain" if you want to keep PNG proportions inside
   },
 
   bg: {
@@ -67,7 +68,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 2,
-    paddingTop: 14,
+    paddingTop: 25,
+    paddingBottom: 10,
   },
   buttonText: {
     fontSize: 15,
@@ -76,8 +78,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonIcon: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     marginBottom: 4,
   },
   buttonSubtext: {

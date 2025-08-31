@@ -190,7 +190,7 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
               ]}
             >
               <Image
-                source={require("../../assets/images/bgicon2.png")}
+                source={require("../../assets/images/bgicon7.png")}
                 style={styles.decorativeIcon}
                 resizeMode="contain"
               />
@@ -203,7 +203,7 @@ const SpinWheelPopup: React.FC<SpinWheelPopupProps> = ({
               ]}
             >
               <Image
-                source={require("../../assets/images/bgicon3.png")}
+                source={require("../../assets/images/bgicon6.png")}
                 style={styles.decorativeIcon}
                 resizeMode="contain"
               />
